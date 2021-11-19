@@ -30,7 +30,22 @@
  * @returns {[{}, {}] | []} objektumok tömbjével tér vissza vagy hiba esetén 
  * üres tömbbel
  */
+const getProducts = async (url = '') => {
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        const sortData = data.sort((item1, item2) => item1.price - item2.price);
+        const filterData = sortData.filter(item => item.price >= 25);
+        return filterData;
+    } catch {
+        console.error(Error)
+        return []
+    }
+};
 
 /**
  * TODO: exportáld ki helyesen a getProducts függvényt!
  */
+export {
+    getProducts,
+}
